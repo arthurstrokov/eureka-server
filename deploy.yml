@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: eureka-server
+  name: eureka-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eureka-server
+  template:
+    metadata:
+      labels:
+        app: eureka-server
+        visualize: "true"
+    spec:
+      containers:
+        - name: eureka-server
+          image: arthurstrokov/eureka-server:v0.0.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: spring.mvc.servlet.path
+              value: /eureka-server
+          ports:
+            - containerPort: 8761
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: eureka-server
+  name: eureka-server
+  annotations:
+    haproxy.org/check: "enabled"
+    haproxy.org/forwarded-for: "enabled"
+    haproxy.org/load-balance: "roundrobin"
+    haproxy.org/path-rewrite: /
+spec:
+  selector:
+    app: eureka-server
+  ports:
+    - port: 8761
+      protocol: TCP
+      targetPort: 8761
+  type: LoadBalancer

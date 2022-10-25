@@ -1,0 +1,7 @@
+version: "3.1"
+services:
+  eureka-server:
+    image: arthurstrokov/eureka-server:latest
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
