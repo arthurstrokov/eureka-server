@@ -1,8 +1,9 @@
 spring:
   main:
     banner-mode: off
-  application.name: eureka-server
-
+  application:
+    name: eureka-server
+---
 server:
   port: ${EUREKA-SERVER-PORT:8761}
 eureka:
@@ -12,7 +13,5 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:
     enable-self-preservation: false
