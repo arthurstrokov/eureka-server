@@ -20,6 +20,11 @@ spec:
         - name: eureka-server
           image: arthurstrokov/eureka-server:v0.0.0
           imagePullPolicy: IfNotPresent
+          env:
+            - name: EUREKA-INSTANCE-HOSTNAME
+              value: eureka-server
+            - name: EUREKA-SERVER-PORT
+              value: "8761"
           ports:
             - containerPort: 8761
 ---
@@ -35,5 +40,6 @@ spec:
       port: 8761
       protocol: TCP
       targetPort: 8761
-      nodePort: 30003
-  type: NodePort
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.59.100
