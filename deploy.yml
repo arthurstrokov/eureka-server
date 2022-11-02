@@ -39,7 +39,5 @@ spec:
     - name: eureka-server-port
       port: 8761
       protocol: TCP
-      targetPort: 8761
-  type: LoadBalancer
-  externalIPs:
-    - 192.168.59.100
+      nodePort: 30001
+  type: NodePort
