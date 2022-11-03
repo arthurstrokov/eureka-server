@@ -1,0 +1,83 @@
+{
+  "id": "/eureka-server",
+  "cmd": null,
+  "cpus": 0.1,
+  "mem": 256,
+  "disk": 0,
+  "instances": 1,
+  "acceptedResourceRoles": [
+    "*"
+  ],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "forcePullImage": false,
+      "image": "arthurstrokov/eureka-server:latest",
+      "parameters": [],
+      "privileged": false
+    },
+    "volumes": [],
+    "portMappings": [
+      {
+        "containerPort": 8761,
+        "hostPort": 8761,
+        "labels": {},
+        "protocol": "tcp",
+        "servicePort": 0
+      }
+    ]
+  },
+  "env": {
+    "CONTAINER_NAME": "eureka-server"
+  },
+  "healthChecks": [
+    {
+      "command": {
+        "value": "curl -f -X GET http://host.docker.internal:8761/actuator/health",
+        "_comment": "curl -f -X GET http://localhost:8888/actuator/health"
+      },
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "maxConsecutiveFailures": 3,
+      "protocol": "COMMAND",
+      "ipProtocol": "IPv4",
+      "timeoutSeconds": 20,
+      "delaySeconds": 15
+    },
+    {
+      "command": {
+        "value": "pwd"
+      },
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "maxConsecutiveFailures": 3,
+      "protocol": "COMMAND",
+      "ipProtocol": "IPv4",
+      "timeoutSeconds": 20,
+      "delaySeconds": 15
+    },
+    {
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 20,
+      "maxConsecutiveFailures": 3,
+      "portIndex": 0,
+      "protocol": "MESOS_TCP",
+      "ipProtocol": "IPv4",
+      "timeoutSeconds": 10,
+      "delaySeconds": 15
+    }
+  ],
+  "networks": [
+    {
+      "mode": "container/bridge"
+    }
+  ],
+  "portDefinitions": [],
+  "backoffFactor": 2,
+  "backoffSeconds": 30,
+  "maxLaunchDelaySeconds": 86400,
+  "upgradeStrategy": {
+    "maximumOverCapacity": 1,
+    "minimumHealthCapacity": 0.5
+  }
+}
