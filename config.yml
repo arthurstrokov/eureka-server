@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eureka-server-config
+  namespace: default
+data:
+  EUREKA-INSTANCE-HOSTNAME: eureka-server
+  EUREKA-SERVER-PORT: "8761"
