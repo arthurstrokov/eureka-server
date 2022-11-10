@@ -6,3 +6,4 @@ metadata:
 data:
   EUREKA-INSTANCE-HOSTNAME: eureka-server
   EUREKA-SERVER-PORT: "8761"
+  EUREKA-SELF-REGISTRY: "true"

@@ -13,7 +13,7 @@ eureka:
     metadata-map:
       metrics.path: /actuator/prometheus
   client:
-    register-with-eureka: false
+    register-with-eureka: ${EUREKA-SELF-REGISTRY:false}
     fetch-registry: false
   server:
     enable-self-preservation: false
