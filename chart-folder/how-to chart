@@ -1,0 +1,5 @@
+helm install eureka-server chart-folder
+helm uninstall eureka-server chart-folder
+
+helm list
+helm status eureka-server

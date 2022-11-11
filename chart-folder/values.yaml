@@ -1,0 +1,5 @@
+container:
+  image: arthurstrokov/eureka-server:v0.0.0
+replicaCount: 2
+application:
+  name: eureka-server
